@@ -1172,3 +1172,29 @@ img { max-width: 100%; }
   .detail__head{margin-bottom:18px}
   .lede{font-size:14px}
 }
+
+/* Gallery fit correction: give tall trouser photography breathing room */
+.gallery__stage .plate--back .plate__inner {
+  padding: clamp(34px, 5.5vw, 78px) clamp(28px, 4vw, 64px) !important;
+  box-sizing: border-box;
+}
+.gallery__stage .plate--back .plate__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  padding: 0 !important;
+}
+.thumb .plate--back .plate__inner {
+  padding: 8px 6px !important;
+}
+.thumb .plate--back .plate__photo {
+  object-fit: contain;
+  object-position: center;
+  padding: 0 !important;
+}
+@media (max-width:699px){
+  .gallery__stage .plate--back .plate__inner {
+    padding: 24px 18px !important;
+  }
+}
