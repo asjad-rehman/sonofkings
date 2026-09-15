@@ -13,7 +13,7 @@
     phone: '+18165911437',           // digits only, E.164
     phoneLabel: '(816) 591-1437',
     product: {
-      name: 'Bullion Crest Tracksuit in Black',
+      name: 'Son of Kings Crest Tracksuit in Black',
       price: 199.99,
       sizes: ['S', 'M', 'L', 'XL', 'XXL'],
       maxPerSize: 9
@@ -21,7 +21,10 @@
     // Drop real photography here to replace the composed plates, e.g.
     // { front: 'assets/img/front.jpg', back: 'assets/img/back.jpg',
     //   detail: 'assets/img/detail.jpg', edition: 'assets/img/edition.jpg' }
-    photos: {}
+    photos: {
+      front: 'assets/img/Codex Image Sep 15, 2026, 12_05_16 AM.png',
+      back: 'assets/img/Codex Image Sep 15, 2026, 12_06_32 AM.png'
+    }
   };
 
   var STORE_KEY = 'sok.bag.v1';
