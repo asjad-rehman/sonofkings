@@ -83,13 +83,13 @@
       if (SITE.phone) {
         // iOS wants ?&body=, Android wants ?body= — both tolerate this form.
         sms.href = 'sms:' + SITE.phone + '?&body=' + encodeURIComponent(JOIN_BODY);
-        sms.textContent = 'Text ' + SITE.phoneLabel;
+        sms.textContent = 'Text';
       } else {
         sms.remove();
       }
     }
     var note = $('#club-note');
-    if (note) note.textContent = 'Email or text to join the updates list.';
+    if (note) note.textContent = 'Text to join the updates list.';
 
     var foot = $('#footer-email');
     if (foot) {
