@@ -10,8 +10,8 @@
      ------------------------------------------------------------------ */
   var SITE = {
     email: 'MuhammadAsjad.RehmanHashmi@gmail.com',
-    phone: '+15714476997',           // digits only, E.164
-    phoneLabel: '(571) 447-6997',
+    phone: '+18165911437',           // digits only, E.164
+    phoneLabel: '(816) 591-1437',
     product: {
       name: 'Bullion Crest Tracksuit in Black',
       price: 199.99,
