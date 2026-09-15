@@ -67,8 +67,8 @@
   function bagTotal() { return bagCount() * SITE.product.price; }
 
   /* ---------- contact links ---------- */
-  var JOIN_SUBJECT = 'Son of Kings — add me to the list';
-  var JOIN_BODY = 'CROWN — add me to the Son of Kings list for the next edition.';
+  var JOIN_SUBJECT = 'Son of Kings updates';
+  var JOIN_BODY = 'Please add me to Son of Kings product and release updates.';
 
   function wireContact() {
     var mail = $('#club-email');
@@ -76,7 +76,7 @@
       mail.href = 'mailto:' + SITE.email +
         '?subject=' + encodeURIComponent(JOIN_SUBJECT) +
         '&body=' + encodeURIComponent(JOIN_BODY);
-      mail.textContent = 'Email to join';
+      mail.textContent = 'Email'
     }
     var sms = $('#club-sms');
     if (sms) {
@@ -89,7 +89,7 @@
       }
     }
     var note = $('#club-note');
-    if (note) note.textContent = 'Opens a message reading “' + JOIN_BODY + '”, ready to send.';
+    if (note) note.textContent = 'Email or text to join the updates list.';
 
     var foot = $('#footer-email');
     if (foot) {
