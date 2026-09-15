@@ -1198,3 +1198,11 @@ img { max-width: 100%; }
     padding: 24px 18px !important;
   }
 }
+
+/* Embedded sizing chart */
+.guide__table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.guide__table{width:100%;min-width:520px;border-collapse:collapse;margin:14px 0 10px;font-size:11px}
+.guide__table th,.guide__table td{padding:10px 8px;text-align:left;border-bottom:1px solid rgba(184,145,73,.18);white-space:nowrap}
+.guide__table thead th{color:var(--gold);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.guide__table tbody th{color:var(--cream)}
+@media(max-width:699px){.guide__table{font-size:10px}.guide__table th,.guide__table td{padding:9px 7px}}
