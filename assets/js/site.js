@@ -6,6 +6,84 @@
   var on = function(el,t,fn,o){if(el)el.addEventListener(t,fn,o)};
   var money = function(n){return '$'+n.toFixed(2)};
 
+  /* Estrah-style deferred hero playback. The explicit control remains available
+     when autoplay is blocked by iOS Low Power Mode, reduced motion, or data saver. */
+  (function initHeroVideo(){
+    var video = $('#sok-hero-video');
+    var source = $('#sok-hero-source');
+    var button = $('#sok-hero-play');
+    if (!video || !source || !button) return;
+
+    var label = $('span', button);
+    var userPaused = false;
+    var startTimer;
+
+    function render(){
+      var playing = !video.paused && !video.ended;
+      button.style.display = 'flex';
+      button.setAttribute('aria-pressed', String(playing));
+      button.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+      if (label) label.textContent = playing ? 'Pause video' : 'Play video';
+      button.classList.toggle('is-playing', playing);
+    }
+
+    function loadSource(){
+      if (!source.getAttribute('src') && source.getAttribute('data-src')) {
+        source.setAttribute('src', source.getAttribute('data-src'));
+        video.load();
+      }
+    }
+
+    function play(){
+      userPaused = false;
+      loadSource();
+      video.preload = 'auto';
+      var attempt = video.play();
+      if (attempt && attempt.catch) attempt.catch(render);
+    }
+
+    on(button, 'click', function(){
+      if (!video.paused) {
+        userPaused = true;
+        video.pause();
+      } else {
+        play();
+      }
+    });
+
+    ['play','playing','pause','waiting','ended'].forEach(function(eventName){
+      on(video, eventName, render, {passive:true});
+    });
+
+    function syncHeroMedia(){
+      clearTimeout(startTimer);
+      var hero = video.closest ? video.closest('.hero') : video;
+      var rect = hero.getBoundingClientRect();
+      var visible = !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight;
+      if (!visible) {
+        video.pause();
+        return;
+      }
+      if (userPaused ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+          (navigator.connection && navigator.connection.saveData)) {
+        render();
+        return;
+      }
+      startTimer = setTimeout(function(){
+        if (document.hidden) return;
+        play();
+      }, 1500);
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(syncHeroMedia).observe(video);
+    }
+    on(document, 'visibilitychange', syncHeroMedia);
+    render();
+    syncHeroMedia();
+  })();
+
   var SITE={
     email:'MuhammadAsjad.RehmanHashmi@gmail.com', phone:'+18165911437', price:199.99,
     sizes:['S','M','L','XL','XXL'], max:9,
