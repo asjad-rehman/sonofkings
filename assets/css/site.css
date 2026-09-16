@@ -575,6 +575,52 @@ a:hover { color: var(--gold-lit); }
   filter: saturate(0);
   transform: translateY(-6%);
 }
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero__video::-webkit-media-controls-start-playback-button,
+.hero__video::-webkit-media-controls { display: none !important; -webkit-appearance: none; }
+.hero__video-play {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 9px 15px;
+  border: 1px solid rgba(207, 168, 77, .42);
+  background: rgba(7, 7, 10, .78);
+  color: var(--gold-lit);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+.hero__video-play:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+  background: var(--gold);
+}
+.hero__video-play.is-playing { display: none !important; }
+@media (max-width: 699px) {
+  .hero__video-play {
+    top: 18px;
+    right: 18px;
+    bottom: auto;
+  }
+}
 .hero__scrim {
   position: absolute;
   inset: 0;
