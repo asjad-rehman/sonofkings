@@ -90,9 +90,15 @@
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__art" aria-hidden="true">
-      <img src="assets/img/crest.png" alt="" width="960" height="987" decoding="async">
-    </div>
+    <video class="hero__video" id="sok-hero-video" muted loop playsinline preload="none" aria-label="Son of Kings collection video">
+      <source id="sok-hero-source" data-src="assets/sok final.mp4" type="video/mp4">
+    </video>
+    <button type="button" class="hero__video-play" id="sok-hero-play" aria-pressed="false" aria-label="Play background video">
+      <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M1 1.5L9 6L1 10.5V1.5Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Play video</span>
+    </button>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__body">
       <p class="eyebrow hero__eyebrow">THE BLACK EDITION</p>
