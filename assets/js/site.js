@@ -22,8 +22,8 @@
     // { front: 'assets/img/front.jpg', back: 'assets/img/back.jpg',
     //   detail: 'assets/img/detail.jpg', edition: 'assets/img/edition.jpg' }
     photos: {
-      front: 'assets/img/Codex Image Sep 15, 2026, 12_05_16 AM.png',
-      back: 'assets/img/Codex Image Sep 15, 2026, 12_06_32 AM.png'
+      front: 'assets/img/black-hoodie.webp',
+      back: 'assets/img/black-trousers.webp'
     }
   };
 
@@ -110,7 +110,8 @@
         img.src = src;
         var cap = $('.plate__caption', plate);
         img.alt = cap ? cap.textContent.trim() : '';
-        img.loading = 'lazy';
+        img.loading = (view === 'front' || view === 'back') ? 'eager' : 'lazy';
+        if (view === 'front') img.fetchPriority = 'high';
         img.decoding = 'async';
         img.className = 'plate__photo';
         inner.replaceChildren(img);
@@ -298,6 +299,12 @@
 
     var checkout = $('#checkout');
     if (checkout) checkout.disabled = count === 0;
+    var smsOrder = $('#checkout-sms');
+    if (smsOrder) {
+      smsOrder.href = count ? 'sms:' + SITE.phone + '?&body=' + encodeURIComponent(orderText()) : '#';
+      smsOrder.setAttribute('aria-disabled', count ? 'false' : 'true');
+      smsOrder.tabIndex = count ? 0 : -1;
+    }
 
     if (!bagBody) return;
     bagBody.replaceChildren();
@@ -425,8 +432,7 @@
   /* ---------- checkout ----------
      No payment processor is wired up. Rather than a button that does
      nothing, checkout hands the customer a pre-filled order email. */
-  on($('#checkout'), 'click', function () {
-    if (!bagCount()) return;
+  function orderText() {
     var lines = SITE.product.sizes
       .filter(function (s) { return bag[s]; })
       .map(function (s) {
@@ -434,21 +440,25 @@
                ' — ' + money(SITE.product.price * bag[s]);
       });
 
-    var body = [
-      'I would like to order:',
+    return [
+      'Hello, I would like to request this Son of Kings order:',
       '',
       lines.join('\n'),
       '',
-      'Subtotal: ' + money(bagTotal()) + ' (delivery and duties included)',
+      'Product subtotal: ' + money(bagTotal()),
       '',
       'Shipping name:',
       'Address:',
       'Phone:'
     ].join('\n');
+  }
+
+  on($('#checkout'), 'click', function () {
+    if (!bagCount()) return;
 
     window.location.href = 'mailto:' + SITE.email +
-      '?subject=' + encodeURIComponent('Son of Kings order — ' + money(bagTotal())) +
-      '&body=' + encodeURIComponent(body);
+      '?subject=' + encodeURIComponent('Son of Kings order request — ' + money(bagTotal())) +
+      '&body=' + encodeURIComponent(orderText());
   });
 
   /* ---------- mobile buy bar ----------
