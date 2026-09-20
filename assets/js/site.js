@@ -85,7 +85,7 @@
   })();
 
   var SITE={
-    email:'MuhammadAsjad.RehmanHashmi@gmail.com', phone:'+18165911437', price:199.99,
+    email:'MuhammadAsjad.RehmanHashmi@gmail.com', phone:'+18165911437', price:199.99, stripeCheckout:'https://buy.stripe.com/fZuaEPdAodYr0WX5PWfYY00',
     sizes:['S','M','L','XL','XXL'], max:9,
     colors:{
       Black:{front:'assets/img/black-hoodie.webp',back:'assets/img/black-trousers.webp',available:true},
@@ -171,7 +171,7 @@
   on(document,'keydown',function(e){if(e.key==='Escape'){if(bagEl&&!bagEl.hidden)setBag(false);else if(mobile&&!mobile.hidden)setNav(false)}});
 
   function orderText(){var lines=Object.keys(bag).map(function(k){var p=k.split('|'),n=bag[k];return '  '+productName(p[0])+' — size '+p[1]+' × '+n+' — '+money(SITE.price*n)});return ['Hello, I would like to request this Son of Kings order:','',lines.join('\n'),'', 'Product subtotal: '+money(total()),'', 'Shipping name:','Address:','Phone:'].join('\n')}
-  on($('#checkout'),'click',function(){if(!count())return;location.href='mailto:'+SITE.email+'?subject='+encodeURIComponent('Son of Kings order request — '+money(total()))+'&body='+encodeURIComponent(orderText())});
+  on($('#checkout'),'click',function(){if(!count())return;location.href=SITE.stripeCheckout;});
 
   var eh=$('.editions__head .lede');if(eh)eh.textContent='Black is available now. Explore every Son of Kings colorway below; Navy, Royal Blue, Forest Green, Marble and Crimson are currently out of stock.';
   var et=$('#editions-title');if(et)et.innerHTML='Explore every <em>color.</em>';
