@@ -171,7 +171,7 @@
   on(document,'keydown',function(e){if(e.key==='Escape'){if(bagEl&&!bagEl.hidden)setBag(false);else if(mobile&&!mobile.hidden)setNav(false)}});
 
   function orderText(){var lines=Object.keys(bag).map(function(k){var p=k.split('|'),n=bag[k];return '  '+productName(p[0])+' — size '+p[1]+' × '+n+' — '+money(SITE.price*n)});return ['Hello, I would like to request this Son of Kings order:','',lines.join('\n'),'', 'Product subtotal: '+money(total()),'', 'Shipping name:','Address:','Phone:'].join('\n')}
-  on($('#checkout'),'click',function(){if(!count())return;location.href=SITE.stripeCheckout;});
+  on($('#checkout'),'click',function(){if(!count())return;location.href='/checkout/';});
 
   var eh=$('.editions__head .lede');if(eh)eh.textContent='Black is available now. Explore every Son of Kings colorway below; Navy, Royal Blue, Forest Green, Marble and Crimson are currently out of stock.';
   var et=$('#editions-title');if(et)et.innerHTML='Explore every <em>color.</em>';
